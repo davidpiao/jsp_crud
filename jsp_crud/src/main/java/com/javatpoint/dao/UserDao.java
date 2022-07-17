@@ -11,7 +11,7 @@ public class UserDao {
 		Connection con = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test", "", "");
+			con = DriverManager.getConnection("jdbc:mysql://walab.handong.edu:3306/camp1","camp1","6naYhKTawFFMpYe2");
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -23,7 +23,7 @@ public class UserDao {
 		try {
 			Connection con = getConnection();
 			PreparedStatement ps = con
-					.prepareStatement("insert into register(name,password,email,sex,country) values(?,?,?,?,?)");
+					.prepareStatement("insert into psj_register(name,password,email,sex,country) values(?,?,?,?,?)");
 			ps.setString(1, u.getName());
 			ps.setString(2, u.getPassword());
 			ps.setString(3, u.getEmail());
@@ -41,7 +41,7 @@ public class UserDao {
 		try {
 			Connection con = getConnection();
 			PreparedStatement ps = con
-					.prepareStatement("update register set name=?,password=?,email=?,sex=?,country=? where id=?");
+					.prepareStatement("update psj_register set name=?,password=?,email=?,sex=?,country=? where id=?");
 			ps.setString(1, u.getName());
 			ps.setString(2, u.getPassword());
 			ps.setString(3, u.getEmail());
@@ -59,7 +59,7 @@ public class UserDao {
 		int status = 0;
 		try {
 			Connection con = getConnection();
-			PreparedStatement ps = con.prepareStatement("delete from register where id=?");
+			PreparedStatement ps = con.prepareStatement("delete from psj_register where id=?");
 			ps.setInt(1, u.getId());
 			status = ps.executeUpdate();
 		} catch (Exception e) {
@@ -74,7 +74,7 @@ public class UserDao {
 
 		try {
 			Connection con = getConnection();
-			PreparedStatement ps = con.prepareStatement("select * from register");
+			PreparedStatement ps = con.prepareStatement("select * from psj_register");
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				User u = new User();
@@ -96,7 +96,7 @@ public class UserDao {
 		User u = null;
 		try {
 			Connection con = getConnection();
-			PreparedStatement ps = con.prepareStatement("select * from register where id=?");
+			PreparedStatement ps = con.prepareStatement("select * from psj_register where id=?");
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
